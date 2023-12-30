@@ -108,7 +108,7 @@ class _ViewQuatationsState extends State<ViewQuatations> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              quatation.businessType ?? "",
+                                              quatation.title ?? "",
                                               style: textstyle(
                                                   kblack, FontWeight.w600, 16),
                                             ),
@@ -116,7 +116,7 @@ class _ViewQuatationsState extends State<ViewQuatations> {
                                               height: 3,
                                             ),
                                             Text(
-                                              quatation.businessCategory ?? "",
+                                              quatation.quatationDate.toString() ?? "",
                                               style: textstyle(
                                                   kgrey, FontWeight.w500, 14),
                                             ),
@@ -124,7 +124,7 @@ class _ViewQuatationsState extends State<ViewQuatations> {
                                               height: 3,
                                             ),
                                             Text(
-                                              quatation.description ?? "",
+                                              quatation.amount ?? "",
                                               style: textstyle(
                                                   kgrey, FontWeight.w500, 14),
                                             ),

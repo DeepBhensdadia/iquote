@@ -34,24 +34,27 @@ class QuatationController extends GetxController {
     );
   }
 
-  TextEditingController name = TextEditingController();
+  TextEditingController title = TextEditingController();
   TextEditingController bussinesstype = TextEditingController();
   TextEditingController bussinesscategory = TextEditingController();
-  TextEditingController value = TextEditingController();
+  TextEditingController amount = TextEditingController();
   TextEditingController descripation = TextEditingController();
   TextEditingController validity = TextEditingController();
 
   createQuatation() async {
     Map<String, dynamic> params = {
-      "customer":name.text,
-      "business_type": bussinesstype.text,
-      "business_category": bussinesscategory.text,
-      "value": value.text,
-      "image": "",
-      "description": descripation.text,
-      "validity": validity.text,
-      "customer_id": "1",
-      "business_id": "1"
+      "business_id" : "1",
+      "customer_id" : "1",
+      "title":title.text,
+      "description" : descripation.text,
+      "quatation_date":DateTime.now().toString(),
+      "valid_till_date":DateTime.now().toString(),
+      "quatation_image" : "",
+      "quatation_images" : "",
+      "amount" : amount.text,
+      "currency_code" : "inr",
+      "quatation_status" : "2",
+      "is_active" : "1",
     };
     final response = await webService.postFormRequest(
         url: "${webService.baseUrl}/store_quatation",

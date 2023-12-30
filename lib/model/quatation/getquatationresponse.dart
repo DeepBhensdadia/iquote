@@ -26,63 +26,71 @@ class Getquatationsresponse {
 
 class Quatation {
   int? id;
-  String? customer;
-  String? businessType;
-  String? businessCategory;
-  int? value;
-  dynamic image;
-  String? description;
-  String? validity;
-  int? customerId;
   int? businessId;
-  String? status;
+  int? customerId;
+  String? title;
+  String? description;
+  DateTime? quatationDate;
+  DateTime? validTillDate;
+  dynamic quatationImage;
+  dynamic quatationImages;
+  String? amount;
+  String? currencyCode;
+  String? quatationStatus;
+  int? isActive;
   DateTime? createdAt;
   DateTime? updatedAt;
 
   Quatation({
     this.id,
-    this.customer,
-    this.businessType,
-    this.businessCategory,
-    this.value,
-    this.image,
-    this.description,
-    this.validity,
-    this.customerId,
     this.businessId,
-    this.status,
+    this.customerId,
+    this.title,
+    this.description,
+    this.quatationDate,
+    this.validTillDate,
+    this.quatationImage,
+    this.quatationImages,
+    this.amount,
+    this.currencyCode,
+    this.quatationStatus,
+    this.isActive,
     this.createdAt,
     this.updatedAt,
   });
 
   factory Quatation.fromJson(Map<String, dynamic> json) => Quatation(
     id: json["id"],
-    customer: json["customer"],
-    businessType: json["business_type"],
-    businessCategory: json["business_category"],
-    value: json["value"],
-    image: json["image"],
-    description: json["description"],
-    validity: json["validity"],
-    customerId: json["customer_id"],
     businessId: json["business_id"],
-    status: json["status"],
+    customerId: json["customer_id"],
+    title: json["title"],
+    description: json["description"],
+    quatationDate: DateTime.parse(json["quatation_date"]),
+    validTillDate: DateTime.parse(json["valid_till_date"]),
+    quatationImage: json["quatation_image"],
+    quatationImages: json["quatation_images"],
+    amount: json["amount"],
+    currencyCode: json["currency_code"],
+    quatationStatus: json["quatation_status"],
+    isActive: json["is_active"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "customer": customer,
-    "business_type": businessType,
-    "business_category": businessCategory,
-    "value": value,
-    "image": image,
-    "description": description,
-    "validity": validity,
-    "customer_id": customerId,
     "business_id": businessId,
-    "status": status,
+    "customer_id": customerId,
+    "title": title,
+    "description": description,
+    "quatation_date": "${quatationDate?.year.toString().padLeft(4, '0')}-${quatationDate?.month.toString().padLeft(2, '0')}-${quatationDate?.day.toString().padLeft(2, '0')}",
+    "valid_till_date": validTillDate?.toIso8601String(),
+    "quatation_image": quatationImage,
+    "quatation_images": quatationImages,
+    "amount": amount,
+    "currency_code": currencyCode,
+    "quatation_status": quatationStatus,
+    "is_active": isActive,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
   };

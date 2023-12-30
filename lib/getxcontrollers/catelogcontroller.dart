@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:iquote/model/catelog/getcatelogresponse.dart';
 import 'package:iquote/model/customer/createcustomerresponse.dart';
-import 'package:iquote/model/customer/getcustomerresponemodel.dart';
 import 'package:iquote/webservices/api_link/custom_api.dart';
 
 class CatalogController extends GetxController {

@@ -14,7 +14,8 @@ class WebService {
 
   WebService({required this.dio, required this.connectivity});
 
-  String baseUrl = "http://192.168.29.198:8000/api/admin";
+  // String baseUrl = "http://192.168.29.198:8000/api/admin";
+  String baseUrl = "https://www.horn7.com/icot/public/api/admin";
 
   var headers = {'Content-Type': 'application/json'};
 

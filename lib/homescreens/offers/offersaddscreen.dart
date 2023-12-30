@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iquote/getxcontrollers/bussinesscategorycontroller.dart';
 import 'package:iquote/getxcontrollers/offerscontroller.dart';
 
 import '../../const.dart';
@@ -14,7 +15,8 @@ class OffersAddScreen extends StatefulWidget {
 }
 
 class _OffersAddScreenState extends State<OffersAddScreen> {
-  OffersController offersController = Get.put(OffersController());
+  BussinessCategoryController offersController =
+      Get.put(BussinessCategoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +182,7 @@ class _OffersAddScreenState extends State<OffersAddScreen> {
                         // ),
                         InkWell(
                           onTap: () {
-                            offersController.createOffers();
+                            offersController.createOffers("1");
                           },
                           child: Container(
                             width: 100,

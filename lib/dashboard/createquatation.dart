@@ -42,8 +42,8 @@ class _CreateQuatationState extends State<CreateQuatation> {
                       height: 20,
                     ),
                     CreateCustomerUi(
-                      Controlleer: quatationController.name,
-                      name: 'Select Customer',
+                      Controlleer: quatationController.title,
+                      name: 'Enter Title',
                       iconsBut: Icons.arrow_drop_down,
                       details: 'Abc Corporation',
                       onpress: () {},
@@ -55,14 +55,14 @@ class _CreateQuatationState extends State<CreateQuatation> {
                       onpress: () {},
                     ),
                     CreateCustomerUi(
-                      Controlleer: quatationController.value,
-                      name: 'Enter value',
+                      Controlleer: quatationController.amount,
+                      name: 'Enter Amount',
                       details: 'Enter the value',
                       onpress: () {},
                     ),
                     CreateCustomerUi(
                       Controlleer: quatationController.bussinesscategory,
-                      name: 'Enter value',
+                      name: 'Enter Bussiness Category',
                       details: 'Enter the value',
                       onpress: () {},
                     ),
