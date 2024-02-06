@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iquote/const.dart';
 import 'package:iquote/dashboard/postrequirments.dart';
 import 'package:iquote/getxcontrollers/mainscreencontroller.dart';
-import 'package:iquote/helper.dart';
+import '../helper.dart';
 import 'createcustomers.dart';
 import 'createquatation.dart';
 import 'homescreen.dart';

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:iquote/getxcontrollers/customercontoller.dart';
-import 'package:iquote/helper.dart';
 import 'package:iquote/model/customer/getcustomerresponemodel.dart';
 import '../const.dart';
 import '../dashboard/createcustomers.dart';
+import '../helper.dart';
 
 class Customers extends StatefulWidget {
   const Customers({super.key});

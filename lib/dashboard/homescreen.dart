@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iquote/getxcontrollers/customercontoller.dart';
+import 'package:iquote/homescreens/freelance/freelancelistingscreen.dart';
+import 'package:iquote/homescreens/goods/goodslist.dart';
+import 'package:iquote/homescreens/jobs/jobslist.dart';
+import 'package:iquote/homescreens/realestate/realestatelist.dart';
+import 'package:iquote/homescreens/services/Serviceslist.dart';
 import 'package:iquote/widget/homepagefistfield.dart';
 import '../const.dart';
 import '../helper.dart';
@@ -24,6 +29,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   CustomerController customerController = Get.put(CustomerController());
+  int _current = 0;
+  final _controller = PageController(
+    initialPage: 0,
+    viewportFraction: 1,
+    keepPage: true,
+  );
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,49 +63,176 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
+                    Row(
+                      children: [],
+                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Cardcustom(
-                                onpressed: () {
-                                  Get.to(const OfferListingPage());
+                            IconButton(
+                                visualDensity: VisualDensity.compact,
+                                onPressed: () {
+                                  _controller.previousPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.ease);
                                 },
-                                name: "Offers",
-                                imageasset:
-                                    "assets/images/noun-advert-2089739 1.png"),
-                            Cardcustom(
-                                onpressed: () {
-                                  Get.to(const ETenderListingPage());
+                                icon: Icon(
+                                  size: 20,
+                                  Icons.arrow_back_ios_new_rounded,
+                                  color: Colors.grey,
+                                )),
+                            Expanded(
+                              child: Container(
+                                height: 75,
+                                child: PageView(
+                                  // reverse: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  controller: _controller,
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Cardcustom(
+                                            onpressed: () {
+                                              Get.to(const OfferListingPage());
+                                            },
+                                            name: "Offers",
+                                            imageasset:
+                                                "assets/images/noun-advert-2089739 1.png"),
+                                        Cardcustom(
+                                            onpressed: () {
+                                              Get.to(const LoanListingPage());
+                                            },
+                                            name: "Loans",
+                                            imageasset:
+                                                "assets/images/Group 1000001363.png"),
+                                        Cardcustom(
+                                            onpressed: () {
+                                              Get.to(const GoodsList());
+                                            },
+                                            name: "Sales",
+                                            imageasset:
+                                                "assets/images/Group 1000001363.png"),
+                                        Cardcustom(
+                                            onpressed: () {
+                                              Get.to(const JobsList());
+                                            },
+                                            name: "Jobs",
+                                            imageasset:
+                                                "assets/images/noun-business-4116307 1.png"),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Cardcustom(
+                                            onpressed: () {
+                                              Get.to(
+                                                  const ETenderListingPage());
+                                            },
+                                            name: "E-Tenders",
+                                            imageasset:
+                                                "assets/images/noun-business-4116307 1.png"),
+                                        Cardcustom(
+                                            onpressed: () {
+                                              Get.to(
+                                                  const EAuctionListingPage());
+                                            },
+                                            name: "E-Auction",
+                                            imageasset:
+                                                "assets/images/noun-auction-3194931 1.png"),
+                                        Cardcustom(
+                                            onpressed: () {
+                                              Get.to(const RealEstateList());
+                                            },
+                                            name: "Real Estate",
+                                            imageasset:
+                                                "assets/images/noun-auction-3194931 1.png"),
+                                        Cardcustom(
+                                            onpressed: () {
+                                              Get.to(const ServicesList());
+                                            },
+                                            name: "Services",
+                                            imageasset:
+                                                "assets/images/noun-auction-3194931 1.png"),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                                visualDensity: VisualDensity.compact,
+                                onPressed: () {
+                                  _controller.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.ease);
                                 },
-                                name: "E-Tenders",
-                                imageasset:
-                                    "assets/images/noun-business-4116307 1.png"),
-                            Cardcustom(
-                                onpressed: () {
-                                  Get.to(const LoanListingPage());
-                                },
-                                name: "Loans",
-                                imageasset:
-                                    "assets/images/Group 1000001363.png"),
-                            Cardcustom(
-                                onpressed: () {
-                                  Get.to(const EAuctionListingPage());
-                                },
-                                name: "E-Auction",
-                                imageasset:
-                                    "assets/images/noun-auction-3194931 1.png"),
-                            Cardcustom(
-                                onpressed: () {},
-                                name: "Sale",
-                                imageasset:
-                                    "assets/images/Group 1000001363.png"),
+                                icon: Icon(
+                                    size: 20,
+                                    Icons.arrow_forward_ios_rounded,
+                                    color: Colors.grey)),
                           ],
                         ),
                       ],
-                    )
+                    ),
+                    // Column(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //     Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //       children: [
+                    //         Cardcustom(
+                    //             onpressed: () {
+                    //               Get.to(const OfferListingPage());
+                    //             },
+                    //             name: "Offers",
+                    //             imageasset:
+                    //                 "assets/images/noun-advert-2089739 1.png"),
+                    //         Cardcustom(
+                    //             onpressed: () {
+                    //               Get.to(const LoanListingPage());
+                    //             },
+                    //             name: "Loans",
+                    //             imageasset:
+                    //             "assets/images/Group 1000001363.png"),
+                    //         Cardcustom(
+                    //             onpressed: () {},
+                    //             name: "Sales",
+                    //             imageasset:
+                    //             "assets/images/Group 1000001363.png"),
+                    //         Cardcustom(
+                    //             onpressed: () {
+                    //               Get.to(const JobsList());
+                    //             },
+                    //             name: "Jobs",
+                    //             imageasset:
+                    //                 "assets/images/noun-business-4116307 1.png"),
+                    //          // Cardcustom(
+                    //          //     onpressed: () {
+                    //          //       Get.to(const ETenderListingPage());
+                    //          //     },
+                    //          //     name: "E-Tenders",
+                    //          //     imageasset:
+                    //          //         "assets/images/noun-business-4116307 1.png"),
+                    //          //
+                    //          // Cardcustom(
+                    //          //     onpressed: () {
+                    //          //       Get.to(const EAuctionListingPage());
+                    //          //     },
+                    //          //     name: "E-Auction",
+                    //          //     imageasset:
+                    //          //         "assets/images/noun-auction-3194931 1.png"),
+                    //
+                    //       ],
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ),
               ),
@@ -145,9 +283,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         IconWithName(
                           onPressed: () {
-                            Get.to(const Settings());
+                            Get.to(const FreelancesList());
                           },
-                          name: "Settings",
+                          name: "Freelance",
                           imageAsset:
                               "assets/images/homescreenicon/gear-solid.svg",
                         ),

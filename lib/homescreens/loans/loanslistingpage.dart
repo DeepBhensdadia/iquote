@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iquote/helper.dart';
+
 import 'package:iquote/homescreens/loans/postloanscreen.dart';
 import 'package:iquote/model/bussinessadvertiseresponse.dart';
 import '../../const.dart';
 import '../../getxcontrollers/bussinesscategorycontroller.dart';
+import '../../helper.dart';
 import 'loansdetailspage.dart';
 
 class LoanListingPage extends StatefulWidget {
@@ -64,7 +65,7 @@ class _LoanListingPageState extends State<LoanListingPage> {
                               border: Border.all(width: 1.5, color: kgrey),
                               color: kgrey,
                             ),
-                            height: 100,
+                            height: 126,
                             width: 100,
                           ),
                           Flexible(
@@ -93,7 +94,7 @@ class _LoanListingPageState extends State<LoanListingPage> {
                                               height: 3,
                                             ),
                                             Text(
-                                              "State Bank Of India",
+                                              "${bussiness.companyName}",
                                               style:
                                               textstyle(Colors.blue, FontWeight.w500, 12),
                                             ),
@@ -120,60 +121,118 @@ class _LoanListingPageState extends State<LoanListingPage> {
                                   const SizedBox(
                                     height: 3,
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                  Wrap(
+
+spacing: 5,
                                     children: [
                                       Row(
-
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 3, horizontal: 8),
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    width: 1, color: Colors.black54),
-                                                borderRadius:
-                                                BorderRadius.circular(5)),
-                                            child: Text(
-                                              maxLines: 2,
-                                              "+91 ${bussiness.contactNumber}",
-                                              style: textstyle(
-                                                  Colors.black, FontWeight.w500, 12),
-                                            ),
+                                          Text(
+                                            maxLines: 2,
+                                            "Type : ",
+                                            style: textstyle(
+                                                Colors.black, FontWeight.w500, 10),
                                           ),
-                                          SizedBox(width: 5,),
                                           Container(
                                             padding: EdgeInsets.symmetric(
-                                                vertical: 3, horizontal: 8),
+                                                vertical: 2, horizontal: 5),
                                             decoration: BoxDecoration(
                                                 border: Border.all(
-                                                    width: 1, color: Colors.black54),
+                                                    width: 0.5, color: Colors.black54),
                                                 borderRadius:
-                                                BorderRadius.circular(5)),
+                                                BorderRadius.circular(3)),
                                             child: Text(
                                               maxLines: 2,
-                                              "Chat",
+                                              "${bussiness.businessAdvertisingType}",
                                               style: textstyle(
-                                                  Colors.black, FontWeight.w500, 12),
-                                            ),
-                                          ), SizedBox(width: 5,),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 3, horizontal: 8),
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    width: 1, color: Colors.black54),
-                                                borderRadius:
-                                                BorderRadius.circular(5)),
-                                            child: Text(
-                                              maxLines: 2,
-                                              "Brochure",
-                                              style: textstyle(
-                                                  Colors.black, FontWeight.w500, 12),
+                                                  Colors.blue, FontWeight.w400, 10),
                                             ),
                                           ),
                                         ],
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+
+                                        children: [
+                                          Text(
+                                            maxLines: 2,
+                                            " | Range: ",
+                                            style: textstyle(
+                                                Colors.black, FontWeight.w500, 10),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 2, horizontal: 5),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 0.5, color: Colors.black54),
+                                                borderRadius:
+                                                BorderRadius.circular(3)),
+                                            child: Text(
+                                              maxLines: 2,
+                                              "${bussiness.description}",
+                                              style: textstyle(
+                                                  Colors.green, FontWeight.w400, 10),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+
+                                    ],
+                                  ),
+SizedBox(height: 8,),
+                                  Wrap(
+
+spacing: 5,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 3, horizontal: 8),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 1, color: Colors.black54),
+                                            borderRadius:
+                                            BorderRadius.circular(3)),
+                                        child: Text(
+                                          maxLines: 2,
+                                          "${bussiness.contactNumber}",
+                                          style: textstyle(
+                                              Colors.black, FontWeight.w500, 12),
+                                        ),
+                                      ),
+
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 3, horizontal: 8),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 1, color: Colors.black54),
+                                            borderRadius:
+                                            BorderRadius.circular(5)),
+                                        child: Text(
+                                          maxLines: 2,
+                                          "Chat",
+                                          style: textstyle(
+                                              Colors.black, FontWeight.w500, 12),
+                                        ),
+                                      ),
+
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 3, horizontal: 8),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 1, color: Colors.black54),
+                                            borderRadius:
+                                            BorderRadius.circular(5)),
+                                        child: Text(
+                                          maxLines: 2,
+                                          "Brochure",
+                                          style: textstyle(
+                                              Colors.black, FontWeight.w500, 12),
+                                        ),
                                       ),
                                     ],
                                   ),

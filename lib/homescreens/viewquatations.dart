@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:iquote/getxcontrollers/quatationcontroller.dart';
-import 'package:iquote/helper.dart';
 import 'package:iquote/model/quatation/getquatationresponse.dart';
 import '../const.dart';
 import '../dashboard/createquatation.dart';
+import '../helper.dart';
 
 class ViewQuatations extends StatefulWidget {
   const ViewQuatations({super.key});

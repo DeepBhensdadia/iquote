@@ -14,14 +14,15 @@ class EAuctionListingPage extends StatefulWidget {
 
 class _EAuctionListingPageState extends State<EAuctionListingPage> {
   BussinessCategoryController bussinessController =
-  Get.put(BussinessCategoryController());
+      Get.put(BussinessCategoryController());
 
   @override
   void initState() {
-    bussinessController.getBussinessAll(id: "4");
+    bussinessController.getBussinessAll(id: "7");
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,195 +35,223 @@ class _EAuctionListingPageState extends State<EAuctionListingPage> {
       appBar: AppBar(title: const Text("E-Auction"), actions: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.sort))
       ]),
-      body:Obx(
-            () => bussinessController.generalShow.isFalse
+      body: Obx(
+        () => bussinessController.generalShow.isFalse
             ? Center(child: CircularProgressIndicator())
             : ListView.builder(
-          itemCount: bussinessController.bussinesslist.length,
-          itemBuilder: (context, index) {
-            businessadvertised bussiness =
-            bussinessController.bussinesslist[index];
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () {
-                  Get.to(const EAuctionDetailsPage());
-                },
-                child: Container(
-                  // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1.5, color: kgrey),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
+                itemCount: bussinessController.bussinesslist.length,
+                itemBuilder: (context, index) {
+                  businessadvertised bussiness =
+                      bussinessController.bussinesslist[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(const EAuctionDetailsPage());
+                      },
+                      child: Container(
+                        // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(8),
-                              topLeft: Radius.circular(8)),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(width: 1.5, color: kgrey),
-                          color: kgrey,
+                          color: Colors.white,
                         ),
-                        // height: 120,
-                        width: 100,
-                      ),
-                      Flexible(
-                        flex: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Flexible(
-                                    flex: 1,
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    topLeft: Radius.circular(8)),
+                                border: Border.all(width: 1.5, color: kgrey),
+                                color: kgrey,
+                              ),
+                              // height: 120,
+                              width: 100,
+                            ),
+                            Flexible(
+                              flex: 3,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                         bussiness.title ?? "",
-                                          style: textstyle(
-                                              kblack, FontWeight.w600, 16),
+                                        Flexible(
+                                          flex: 1,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                bussiness.title ?? "",
+                                                style: textstyle(kblack,
+                                                    FontWeight.w600, 16),
+                                              ),
+                                              const SizedBox(
+                                                height: 3,
+                                              ),
+                                              Text(
+                                                "${bussiness.companyName}",
+                                                style: textstyle(Colors.blue,
+                                                    FontWeight.w500, 12),
+                                              ),
+                                              const SizedBox(
+                                                height: 3,
+                                              ),
+                                              Text(
+                                                maxLines: 2,
+                                                bussiness.address ?? "",
+                                                style: textstyle(
+                                                    kgrey, FontWeight.w500, 12),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        const SizedBox(
-                                          height: 3,
+                                        const Icon(
+                                          Icons.bookmark_added,
+                                          color: yellowcustomer,
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Wrap(
+                                      spacing: 5,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              maxLines: 2,
+                                              "Bid Mode : ",
+                                              style: textstyle(Colors.black,
+                                                  FontWeight.w500, 10),
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2, horizontal: 5),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      color: Colors.black54),
+                                                  borderRadius:
+                                                      BorderRadius.circular(3)),
+                                              child: Text(
+                                                maxLines: 2,
+                                                "${bussiness.description}",
+                                                style: textstyle(Colors.blue,
+                                                    FontWeight.w400, 10),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          maxLines: 2,
-                                          bussiness.address ?? "",
-                                          style:
-                                          textstyle(kgrey, FontWeight.w500, 12),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              maxLines: 2,
+                                              " | Minimum Bid Value: ",
+                                              style: textstyle(Colors.black,
+                                                  FontWeight.w500, 10),
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2, horizontal: 5),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      color: Colors.black54),
+                                                  borderRadius:
+                                                      BorderRadius.circular(3)),
+                                              child: Text(
+                                                maxLines: 2,
+                                                "${bussiness.value}",
+                                                style: textstyle(Colors.green,
+                                                    FontWeight.w400, 10),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  const Icon(
-                                    Icons.bookmark_added,
-                                    color: yellowcustomer,
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 3,
-                              ),
-
-                              Text(
-                                maxLines: 2,
-                                "Price : 12,12345",
-                                style:
-                                textstyle(kgrey, FontWeight.w600, 10),
-                              ),
-
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Row(
-
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 3, horizontal: 8),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1, color: Colors.black54),
-                                            borderRadius:
-                                            BorderRadius.circular(5)),
-                                        child: Text(
-                                          maxLines: 2,
-                                          "+91 ${bussiness.contactNumber}",
-                                          style: textstyle(
-                                              Colors.black, FontWeight.w500, 12),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Wrap(
+                                      spacing: 5,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 3, horizontal: 8),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: Colors.black54),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Text(
+                                            maxLines: 2,
+                                            "${bussiness.contactNumber}",
+                                            style: textstyle(Colors.black,
+                                                FontWeight.w500, 12),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(width: 5,),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 3, horizontal: 8),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1, color: Colors.black54),
-                                            borderRadius:
-                                            BorderRadius.circular(5)),
-                                        child: Text(
-                                          maxLines: 2,
-                                          "Chat",
-                                          style: textstyle(
-                                              Colors.black, FontWeight.w500, 12),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 3, horizontal: 8),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: Colors.black54),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Text(
+                                            maxLines: 2,
+                                            "Chat",
+                                            style: textstyle(Colors.black,
+                                                FontWeight.w500, 12),
+                                          ),
                                         ),
-                                      ), SizedBox(width: 5,),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 3, horizontal: 8),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1, color: Colors.black54),
-                                            borderRadius:
-                                            BorderRadius.circular(5)),
-                                        child: Text(
-                                          maxLines: 2,
-                                          "Bid Now",
-                                          style: textstyle(
-                                              Colors.black, FontWeight.w500, 12),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 3, horizontal: 8),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: Colors.black54),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Text(
+                                            maxLines: 2,
+                                            "Bid Now",
+                                            style: textstyle(Colors.black,
+                                                FontWeight.w500, 12),
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  // Column(
-                                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                                  //   children: [
-                                  //
-                                  //     Text(
-                                  //       maxLines: 2,
-                                  //       "Type - Commercial",
-                                  //       style:
-                                  //       textstyle(kgrey, FontWeight.w600, 10),
-                                  //     ),
-                                  //
-                                  //     Text(
-                                  //       maxLines: 2,
-                                  //       "Posted on 21 August 2023 at 11:AM",
-                                  //       style:
-                                  //       textstyle(kgrey, FontWeight.w600, 10),
-                                  //     ),
-                                  //
-                                  //     Text(
-                                  //       maxLines: 2,
-                                  //       "Auction ID - #73894",
-                                  //       style:
-                                  //       textstyle(kgrey, FontWeight.w600, 10),
-                                  //     ),
-                                  //
-                                  //   ],
-                                  // ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
-                      )
-                    ],
-                  ),
-                ),
+                      ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
       ),
-
-
-
-
     );
   }
 }

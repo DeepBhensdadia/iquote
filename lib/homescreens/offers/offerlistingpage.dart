@@ -4,11 +4,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:iquote/getxcontrollers/bussinesscategorycontroller.dart';
 import 'package:iquote/getxcontrollers/offerscontroller.dart';
-import 'package:iquote/helper.dart';
 import 'package:iquote/model/bussinessadvertiseresponse.dart';
 import 'package:iquote/model/offers/getoffersresponse.dart';
-
 import '../../const.dart';
+import '../../helper.dart';
 import 'offerdetailspage.dart';
 import 'offersaddscreen.dart';
 
@@ -190,19 +189,22 @@ class _OfferListingPageState extends State<OfferListingPage> {
                                                     height: 3,
                                                   ),
                                                   Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                                                     children: [
-                                                      Text(
-                                                        maxLines: 2,
-                                                        // "Hotel Crown",
-                                                        bussiness.title?? "",
-                                                        style: textstyle(
-                                                            Colors.blue,
-                                                            FontWeight.w500,
-                                                            12),
+                                                      Flexible(
+                                                        flex:1,
+                                                        child: Text(
+                                                          maxLines: 2,
+                                                          // "Hotel Crown",
+                                                          bussiness.companyName ?? "",
+                                                          style: textstyle(
+                                                              Colors.blue,
+                                                              FontWeight.w500,
+                                                              12),
+                                                        ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5,
-                                                      ),
+
                                                       Visibility(
                                                         visible: bussiness.isFeatured == 0 ?false :true,
                                                         child: Container(
@@ -275,7 +277,7 @@ class _OfferListingPageState extends State<OfferListingPage> {
                                               child: Text(
                                                 maxLines: 2,
                                                 // "+91 9328143230",
-                                                "+91 ${bussiness.contactNumber}",
+                                                "${bussiness.contactNumber}",
                                                 style: textstyle(Colors.black,
                                                     FontWeight.w500, 12),
                                               ),

@@ -9,7 +9,7 @@ class SharedPref {
       _sharedPreferences = await SharedPreferences.getInstance();
 
   static Future<void> save(
-          {required String value, required PrefKey prefKey}) async =>
+      {required String value, required PrefKey prefKey}) async =>
       await _sharedPreferences.setString(prefKey.name, value);
 
   static String? get({required PrefKey prefKey}) {
