@@ -148,7 +148,7 @@ class _EAuctionListingPageState extends State<EAuctionListingPage> {
                                                       BorderRadius.circular(3)),
                                               child: Text(
                                                 maxLines: 2,
-                                                "${bussiness.description}",
+                                                "${bussiness.value}",
                                                 style: textstyle(Colors.blue,
                                                     FontWeight.w400, 10),
                                               ),

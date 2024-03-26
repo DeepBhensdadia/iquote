@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:iquote/const.dart';
+import 'package:iquote/getxcontrollers/bussinesscategorycontroller.dart';
 import '../../helper.dart';
 
 class ETenderDetailsPage extends StatefulWidget {
@@ -13,11 +14,25 @@ class ETenderDetailsPage extends StatefulWidget {
 }
 
 class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
+  BussinessCategoryController bussinesscontroller =
+      Get.put(BussinessCategoryController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    bussinesscontroller.getBussinessdetails(id: "4");
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
+          body: GetBuilder<BussinessCategoryController>(
+        builder: (controller) => controller.detailsshow == false
+            ? Center(
+          child: CircularProgressIndicator(),
+        )
+            : SingleChildScrollView(
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
@@ -162,16 +177,18 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Text(
-                                "NHAI",
+                               Text(
+                                // "NHAI",
+                                "${controller.bussinessdetails.businessAdvertise?.businessName}",
                                 style: TextStyle(
                                     fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(
                                 height: 5,
                               ),
-                              const Text(
-                                "Road Construction Tender",
+                               Text(
+                                // "Road Construction Tender",
+                                "${controller.bussinessdetails.businessAdvertise?.title}",
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontSize: 16,
@@ -181,13 +198,13 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8.0),
                                 child: Row(
-                                  children: const [
+                                  children:  [
                                     Icon(
                                       Icons.location_on_outlined,
                                       color: yellowcustomer,
                                     ),
                                     Text(
-                                      "19 Km",
+                                      "${controller.bussinessdetails.businessAdvertiseDetails?.first.distance} Km",
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 16,
@@ -201,7 +218,7 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                       color: yellowcustomer,
                                     ),
                                     Text(
-                                      "4.8 Rating",
+                                      "${controller.bussinessdetails.businessAdvertiseDetails?.first.rating} Rating",
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 16,
@@ -210,8 +227,9 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                   ],
                                 ),
                               ),
-                              const Text(
-                                "Most whole Alaskan Red King Crabs get broken down into legs, claws, and lump meat. We offer all of these options as well in our online shop, but there is nothing like getting the whole . . . .",
+                               Text(
+                                // "Most whole Alaskan Red King Crabs get broken down into legs, claws, and lump meat. We offer all of these options as well in our online shop, but there is nothing like getting the whole . . . .",
+                                 "${controller.bussinessdetails.businessAdvertise?.description}",
                                 style: TextStyle(
                                     color: kblack,
                                     fontSize: 14,
@@ -233,7 +251,7 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                     Text(
                                       maxLines: 2,
                                       // "Offer expires on 05, Nov 2023",
-                                      "Tender ID - #0707766699ABD",
+                                      "Tender ID - ${controller.bussinessdetails.businessAdvertiseDetails?.first.advertiseIds}",
                                       style:
                                           textstyle(kgrey, FontWeight.w500, 12),
                                     ),
@@ -265,7 +283,8 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                                       BorderRadius.circular(3)),
                                               child: Text(
                                                 maxLines: 2,
-                                                "05,Nov,2023",
+                                                // "05,Nov,2023",
+                                                "${controller.bussinessdetails.businessAdvertise?.validityTo}",
                                                 style: textstyle(Colors.blue,
                                                     FontWeight.w400, 10),
                                               ),
@@ -294,7 +313,8 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                                       BorderRadius.circular(3)),
                                               child: Text(
                                                 maxLines: 2,
-                                                "₹12 lakh",
+                                                // "₹12 lakh",
+                                                "${controller.bussinessdetails.businessAdvertise?.value}",
                                                 style: textstyle(Colors.green,
                                                     FontWeight.w400, 10),
                                               ),
@@ -356,7 +376,7 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Column(
                             children: [
-                               Text(
+                              Text(
                                 "Basic Details",
                                 style: headingstyle,
                               ),
@@ -371,7 +391,7 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                               Text(
+                              Text(
                                 "Payment Instruments",
                                 style: headingstyle,
                               ),
@@ -426,7 +446,7 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                               Text(
+                              Text(
                                 "Other Tenders From NHAI",
                                 style: headingstyle,
                               ),
@@ -462,7 +482,8 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                         borderRadius: const BorderRadius.only(
                                             bottomLeft: Radius.circular(8),
                                             topLeft: Radius.circular(8)),
-                                        border: Border.all(width: 1.5, color: kgrey),
+                                        border: Border.all(
+                                            width: 1.5, color: kgrey),
                                         color: kgrey,
                                       ),
                                       height: 120,
@@ -473,34 +494,41 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Flexible(
                                                   flex: 1,
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                        MainAxisAlignment.start,
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         "Road Construction Tender",
-                                                        style: textstyle(kblack,
-                                                            FontWeight.w600, 16),
+                                                        style: textstyle(
+                                                            kblack,
+                                                            FontWeight.w600,
+                                                            16),
                                                       ),
                                                       const SizedBox(
                                                         height: 3,
                                                       ),
                                                       Text(
                                                         "NHAI - National Highway Authority Of India",
-                                                        style: textstyle(Colors.blue,
-                                                            FontWeight.w500, 12),
+                                                        style: textstyle(
+                                                            Colors.blue,
+                                                            FontWeight.w500,
+                                                            12),
                                                       ),
                                                     ],
                                                   ),
@@ -515,11 +543,11 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                               height: 3,
                                             ),
                                             Container(
-                                              width: screenwidth(context, dividedby: 2),
+                                              width: screenwidth(context,
+                                                  dividedby: 2),
                                               child: Text(
                                                 maxLines: 2,
-                                                
-                                                    "Jaydev Vihar, Aswath Nagar, Nayapalli, Bhubaneswar",
+                                                "Jaydev Vihar, Aswath Nagar, Nayapalli, Bhubaneswar",
                                                 style: textstyle(
                                                     kgrey, FontWeight.w500, 12),
                                               ),
@@ -531,55 +559,73 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                               spacing: 5,
                                               children: [
                                                 Row(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     Text(
                                                       maxLines: 2,
                                                       "Due Date : ",
-                                                      style: textstyle(Colors.black,
-                                                          FontWeight.w400, 8),
+                                                      style: textstyle(
+                                                          Colors.black,
+                                                          FontWeight.w400,
+                                                          8),
                                                     ),
                                                     Container(
-                                                      padding: EdgeInsets.symmetric(
-                                                          vertical: 2, horizontal: 5),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 2,
+                                                              horizontal: 5),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 0.5,
-                                                              color: Colors.black54),
+                                                              color: Colors
+                                                                  .black54),
                                                           borderRadius:
-                                                          BorderRadius.circular(3)),
+                                                              BorderRadius
+                                                                  .circular(3)),
                                                       child: Text(
                                                         maxLines: 2,
                                                         "${DateFormat('dd-MMM-yyyy').format(DateTime.now())}",
-                                                        style: textstyle(Colors.blue,
-                                                            FontWeight.w400, 8),
+                                                        style: textstyle(
+                                                            Colors.blue,
+                                                            FontWeight.w400,
+                                                            8),
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                                 Row(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     Text(
                                                       maxLines: 2,
                                                       " | Tender Estimated Value : ",
-                                                      style: textstyle(Colors.black,
-                                                          FontWeight.w400, 8),
+                                                      style: textstyle(
+                                                          Colors.black,
+                                                          FontWeight.w400,
+                                                          8),
                                                     ),
                                                     Container(
-                                                      padding: EdgeInsets.symmetric(
-                                                          vertical: 2, horizontal: 5),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 2,
+                                                              horizontal: 5),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 0.5,
-                                                              color: Colors.black54),
+                                                              color: Colors
+                                                                  .black54),
                                                           borderRadius:
-                                                          BorderRadius.circular(3)),
+                                                              BorderRadius
+                                                                  .circular(3)),
                                                       child: Text(
                                                         maxLines: 2,
                                                         "₹12 lakh",
-                                                        style: textstyle(Colors.green,
-                                                            FontWeight.w400, 8),
+                                                        style: textstyle(
+                                                            Colors.green,
+                                                            FontWeight.w400,
+                                                            8),
                                                       ),
                                                     ),
                                                   ],
@@ -591,45 +637,58 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.end,
+                                                  CrossAxisAlignment.end,
                                               children: [
                                                 Row(
                                                   children: [
                                                     Container(
-                                                      padding: EdgeInsets.symmetric(
-                                                          vertical: 3, horizontal: 8),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 3,
+                                                              horizontal: 8),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 1,
-                                                              color: Colors.black54),
+                                                              color: Colors
+                                                                  .black54),
                                                           borderRadius:
-                                                          BorderRadius.circular(5)),
+                                                              BorderRadius
+                                                                  .circular(5)),
                                                       child: Text(
                                                         maxLines: 2,
                                                         "Enquire Now",
-                                                        style: textstyle(Colors.black,
-                                                            FontWeight.w500, 12),
+                                                        style: textstyle(
+                                                            Colors.black,
+                                                            FontWeight.w500,
+                                                            12),
                                                       ),
                                                     ),
                                                     SizedBox(
                                                       width: 5,
                                                     ),
                                                     Container(
-                                                      padding: EdgeInsets.symmetric(
-                                                          vertical: 3, horizontal: 8),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 3,
+                                                              horizontal: 8),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 1,
-                                                              color: Colors.black54),
+                                                              color: Colors
+                                                                  .black54),
                                                           borderRadius:
-                                                          BorderRadius.circular(5)),
+                                                              BorderRadius
+                                                                  .circular(5)),
                                                       child: Text(
                                                         maxLines: 2,
                                                         "Download",
-                                                        style: textstyle(Colors.black,
-                                                            FontWeight.w500, 12),
+                                                        style: textstyle(
+                                                            Colors.black,
+                                                            FontWeight.w500,
+                                                            12),
                                                       ),
                                                     ),
                                                   ],
@@ -675,7 +734,7 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                           width: screenwidth(context, dividedby: 1),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children:  [
+                            children: [
                               Text(
                                 "Testimonial",
                                 style: headingstyle,
@@ -691,7 +750,7 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                           width: screenwidth(context, dividedby: 1),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children:  [
+                            children: [
                               Text(
                                 "Terms & Conditions",
                                 style: headingstyle,
@@ -701,7 +760,8 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
                               ),
                               Text(
                                 textAlign: TextAlign.justify,
-                                "Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum enim et sit. Hendrerit tellus fringilla nunc pellentesque faucibus scelerisque. Enim gravida bibendum consequat nibh. Nisl odio nisl viverra neque mattis senectus.  Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum enim et sit. Hendrerit tellus fringilla nunc pellentesque faucibus scelerisque. Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum ",
+                                "${controller.bussinessdetails.businessAdvertise?.termsCondition}",
+                                // "Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum enim et sit. Hendrerit tellus fringilla nunc pellentesque faucibus scelerisque. Enim gravida bibendum consequat nibh. Nisl odio nisl viverra neque mattis senectus.  Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum enim et sit. Hendrerit tellus fringilla nunc pellentesque faucibus scelerisque. Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum ",
                                 style: TextStyle(
                                     color: kblack,
                                     fontSize: 14,
@@ -718,7 +778,7 @@ class _ETenderDetailsPageState extends State<ETenderDetailsPage> {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

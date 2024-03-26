@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:iquote/const.dart';
 import 'package:iquote/homescreens/etender/etenderdetailspage.dart';
 
+import '../../getxcontrollers/bussinesscategorycontroller.dart';
 import '../../helper.dart';
 
 class EAuctionDetailsPage extends StatefulWidget {
@@ -15,11 +16,25 @@ class EAuctionDetailsPage extends StatefulWidget {
 }
 
 class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
+
+  BussinessCategoryController bussinesscontroller =
+  Get.put(BussinessCategoryController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    bussinesscontroller.getBussinessdetails(id: "4");
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
+        body: GetBuilder<BussinessCategoryController>(builder: (controller) => controller.detailsshow == false
+            ? Center(
+          child: CircularProgressIndicator(),
+        )
+            : SingleChildScrollView(
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
@@ -51,7 +66,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                     color: Colors.white,
                                     shape: BoxShape.circle),
                                 child:
-                                    const Center(child: Icon(Icons.arrow_back)),
+                                const Center(child: Icon(Icons.arrow_back)),
                               ),
                               Row(
                                 children: [
@@ -62,7 +77,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                         color: Colors.white,
                                         shape: BoxShape.circle),
                                     child:
-                                        const Center(child: Icon(Icons.share)),
+                                    const Center(child: Icon(Icons.share)),
                                   ),
                                   const SizedBox(
                                     width: 10,
@@ -74,7 +89,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                         color: Colors.white,
                                         shape: BoxShape.circle),
                                     child:
-                                        const Center(child: Icon(Icons.search)),
+                                    const Center(child: Icon(Icons.search)),
                                   ),
                                 ],
                               ),
@@ -111,7 +126,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                       padding: const EdgeInsets.symmetric(
@@ -119,7 +134,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                       decoration: BoxDecoration(
                                           color: Colors.blue.withOpacity(0.3),
                                           borderRadius:
-                                              BorderRadius.circular(5)),
+                                          BorderRadius.circular(5)),
                                       child: const Text(
                                         "E-Auction",
                                         style: TextStyle(
@@ -137,9 +152,9 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                             shape: BoxShape.circle),
                                         child: const Center(
                                             child: Icon(
-                                          Icons.location_on,
-                                          color: kblue,
-                                        )),
+                                              Icons.location_on,
+                                              color: kblue,
+                                            )),
                                       ),
                                       const SizedBox(
                                         width: 15,
@@ -149,13 +164,13 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                         width: 40,
                                         decoration: BoxDecoration(
                                             color:
-                                                yellowcustomer.withOpacity(0.3),
+                                            yellowcustomer.withOpacity(0.3),
                                             shape: BoxShape.circle),
                                         child: const Center(
                                             child: Icon(
-                                          Icons.favorite,
-                                          color: yellowcustomer,
-                                        )),
+                                              Icons.favorite,
+                                              color: yellowcustomer,
+                                            )),
                                       ),
                                     ],
                                   ),
@@ -164,16 +179,18 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Text(
-                                "Muthoot Finance",
+                               Text(
+                                 "${controller.bussinessdetails.businessAdvertise?.businessName}",
+                                // "Muthoot Finance",
                                 style: TextStyle(
                                     fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(
                                 height: 5,
                               ),
-                              const Text(
-                                "Gold Auction",
+                               Text(
+                                // "Gold Auction",
+                                "${controller.bussinessdetails.businessAdvertise?.title}",
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontSize: 16,
@@ -181,15 +198,15 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                const EdgeInsets.symmetric(vertical: 8.0),
                                 child: Row(
-                                  children: const [
+                                  children:  [
                                     Icon(
                                       Icons.location_on_outlined,
                                       color: yellowcustomer,
                                     ),
                                     Text(
-                                      "19 Km",
+                                      "${controller.bussinessdetails.businessAdvertiseDetails?.first.distance} Km",
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 16,
@@ -203,7 +220,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                       color: yellowcustomer,
                                     ),
                                     Text(
-                                      "4.8 Rating",
+                                      "${controller.bussinessdetails.businessAdvertiseDetails?.first.rating} Rating",
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 16,
@@ -212,8 +229,9 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                   ],
                                 ),
                               ),
-                              const Text(
-                                "Most whole Alaskan Red King Crabs get broken down into legs, claws, and lump meat. We offer all of these options as well in our online shop, but there is nothing like getting the whole . . . .",
+                               Text(
+                                // "Most whole Alaskan Red King Crabs get broken down into legs, claws, and lump meat. We offer all of these options as well in our online shop, but there is nothing like getting the whole . . . .",
+                                "${controller.bussinessdetails.businessAdvertise?.description}",
                                 style: TextStyle(
                                     color: kblack,
                                     fontSize: 14,
@@ -235,9 +253,9 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                     Text(
                                       maxLines: 2,
                                       // "Offer expires on 05, Nov 2023",
-                                      "Tender ID - #0707766699ABD",
+                                      "Tender ID - ${controller.bussinessdetails.businessAdvertiseDetails?.first.advertiseIds}",
                                       style:
-                                          textstyle(kgrey, FontWeight.w500, 12),
+                                      textstyle(kgrey, FontWeight.w500, 12),
                                     ),
                                     const SizedBox(
                                       height: 8,
@@ -256,18 +274,19 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                             ),
                                             Container(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 2,
-                                                      horizontal: 5),
+                                              const EdgeInsets.symmetric(
+                                                  vertical: 2,
+                                                  horizontal: 5),
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       width: 0.5,
                                                       color: Colors.black54),
                                                   borderRadius:
-                                                      BorderRadius.circular(3)),
+                                                  BorderRadius.circular(3)),
                                               child: Text(
                                                 maxLines: 2,
-                                                "05,Nov,2023",
+                                                // "05,Nov,2023",
+                                                "${controller.bussinessdetails.businessAdvertise?.validityTo}",
                                                 style: textstyle(Colors.blue,
                                                     FontWeight.w400, 10),
                                               ),
@@ -285,18 +304,19 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                             ),
                                             Container(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 2,
-                                                      horizontal: 5),
+                                              const EdgeInsets.symmetric(
+                                                  vertical: 2,
+                                                  horizontal: 5),
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       width: 0.5,
                                                       color: Colors.black54),
                                                   borderRadius:
-                                                      BorderRadius.circular(3)),
+                                                  BorderRadius.circular(3)),
                                               child: Text(
                                                 maxLines: 2,
-                                                "₹12 lakh",
+                                                // "₹12 lakh",
+                                                "${controller.bussinessdetails.businessAdvertise?.value}",
                                                 style: textstyle(Colors.green,
                                                     FontWeight.w400, 10),
                                               ),
@@ -317,7 +337,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                               border: Border.all(
                                                   width: 1, color: Colors.blue),
                                               borderRadius:
-                                                  BorderRadius.circular(5)),
+                                              BorderRadius.circular(5)),
                                           child: Text(
                                             maxLines: 2,
                                             // "+91 9328143230",
@@ -337,7 +357,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                                   width: 1,
                                                   color: Colors.green),
                                               borderRadius:
-                                                  BorderRadius.circular(5)),
+                                              BorderRadius.circular(5)),
                                           child: Text(
                                             maxLines: 2,
                                             "Download",
@@ -503,23 +523,23 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              MainAxisAlignment
+                                                  .spaceBetween,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 Flexible(
                                                   flex: 1,
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                                    MainAxisAlignment.start,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    CrossAxisAlignment
+                                                        .start,
                                                     children: [
                                                       Text(
                                                         "Road Construction Tender",
@@ -568,7 +588,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                               children: [
                                                 Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  MainAxisSize.min,
                                                   children: [
                                                     Text(
                                                       maxLines: 2,
@@ -580,17 +600,17 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                                     ),
                                                     Container(
                                                       padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 2,
-                                                              horizontal: 5),
+                                                      EdgeInsets.symmetric(
+                                                          vertical: 2,
+                                                          horizontal: 5),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 0.5,
                                                               color: Colors
                                                                   .black54),
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(3)),
+                                                          BorderRadius
+                                                              .circular(3)),
                                                       child: Text(
                                                         maxLines: 2,
                                                         "${DateFormat('dd-MMM-yyyy').format(DateTime.now())}",
@@ -604,7 +624,7 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                                 ),
                                                 Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  MainAxisSize.min,
                                                   children: [
                                                     Text(
                                                       maxLines: 2,
@@ -616,17 +636,17 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                                     ),
                                                     Container(
                                                       padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 2,
-                                                              horizontal: 5),
+                                                      EdgeInsets.symmetric(
+                                                          vertical: 2,
+                                                          horizontal: 5),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 0.5,
                                                               color: Colors
                                                                   .black54),
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(3)),
+                                                          BorderRadius
+                                                              .circular(3)),
                                                       child: Text(
                                                         maxLines: 2,
                                                         "₹12 lakh",
@@ -645,26 +665,26 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              MainAxisAlignment
+                                                  .spaceBetween,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
+                                              CrossAxisAlignment.end,
                                               children: [
                                                 Row(
                                                   children: [
                                                     Container(
                                                       padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 3,
-                                                              horizontal: 8),
+                                                      EdgeInsets.symmetric(
+                                                          vertical: 3,
+                                                          horizontal: 8),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 1,
                                                               color: Colors
                                                                   .black54),
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
+                                                          BorderRadius
+                                                              .circular(5)),
                                                       child: Text(
                                                         maxLines: 2,
                                                         "Enquire Now",
@@ -679,17 +699,17 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                                                     ),
                                                     Container(
                                                       padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 3,
-                                                              horizontal: 8),
+                                                      EdgeInsets.symmetric(
+                                                          vertical: 3,
+                                                          horizontal: 8),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 1,
                                                               color: Colors
                                                                   .black54),
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
+                                                          BorderRadius
+                                                              .circular(5)),
                                                       child: Text(
                                                         maxLines: 2,
                                                         "Download",
@@ -768,7 +788,8 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
                               ),
                               Text(
                                 textAlign: TextAlign.justify,
-                                "Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum enim et sit. Hendrerit tellus fringilla nunc pellentesque faucibus scelerisque. Enim gravida bibendum consequat nibh. Nisl odio nisl viverra neque mattis senectus.  Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum enim et sit. Hendrerit tellus fringilla nunc pellentesque faucibus scelerisque. Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum ",
+                                // "Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum enim et sit. Hendrerit tellus fringilla nunc pellentesque faucibus scelerisque. Enim gravida bibendum consequat nibh. Nisl odio nisl viverra neque mattis senectus.  Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum enim et sit. Hendrerit tellus fringilla nunc pellentesque faucibus scelerisque. Lorem ipsum dolor sit amet consectetur. Tortor venenatis ipsum elementum mauris. Fusce morbi arcu sagittis ac sagittis ornare ultricies. Nec turpis libero morbi fermentum ",
+                                "${controller.bussinessdetails.businessAdvertise?.termsCondition}",
                                 style: TextStyle(
                                     color: kblack,
                                     fontSize: 14,
@@ -784,7 +805,9 @@ class _EAuctionDetailsPageState extends State<EAuctionDetailsPage> {
               )
             ],
           ),
-        ),
+        ),)
+
+
       ),
     );
   }

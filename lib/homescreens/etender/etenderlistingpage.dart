@@ -55,7 +55,7 @@ class _ETenderListingPageState extends State<ETenderListingPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        Get.to(const ETenderDetailsPage());
+                        Get.to( ETenderDetailsPage());
                       },
                       child: Container(
                         // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),

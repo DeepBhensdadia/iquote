@@ -45,7 +45,7 @@ class _LoanListingPageState extends State<LoanListingPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                      Get.to(const LoanDetailsPage());
+                      Get.to( LoanDetailsPage(id : bussiness.id.toString()));
                     },
                     child: Container(
                       // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),

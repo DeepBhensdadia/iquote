@@ -86,7 +86,7 @@ class _OfferListingPageState extends State<OfferListingPage> {
                         padding: const EdgeInsets.only(right: 5.0),
                         child: InkWell(
                           onTap: () {
-                            Get.to(const OfferDetailsPage());
+                            Get.to( OfferDetailsPage(id : bussiness.id.toString()));
                           },
                           child: Container(
                             // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),

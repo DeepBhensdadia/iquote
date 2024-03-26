@@ -10,24 +10,42 @@ import 'package:iquote/model/bussinessadvertiseresponse.dart';
 import 'package:iquote/model/customer/createcustomerresponse.dart';
 import 'package:iquote/webservices/api_link/custom_api.dart';
 
-class BussinessCategoryController extends GetxController{
+import '../model/getbussinessdetailsresponse.dart';
 
+class BussinessCategoryController extends GetxController {
   WebService webService = WebService(dio: Dio(), connectivity: Connectivity());
 
   RxList<businessadvertised> bussinesslist = <businessadvertised>[].obs;
   RxBool generalShow = false.obs;
   getBussinessAll({required String id}) async {
     generalShow.value = false;
-    final response =
-    await webService.getRequest(url: "${webService.baseUrl}/business_advertised/$id");
+    final response = await webService.getRequest(
+        url: "${webService.baseUrl}/business_advertised/$id");
     response.fold(
-          (l) {
-            bussinesslist.clear();
+      (l) {
+        bussinesslist.clear();
         var cusrtomerdetails = getbussinessresponseFromJson(l.toString());
-            bussinesslist.addAll(cusrtomerdetails.data?.toList() ?? []);
+        bussinesslist.addAll(cusrtomerdetails.data?.toList() ?? []);
         generalShow.value = true;
       },
-          (r) => print(r.message),
+      (r) => print(r.message),
+    );
+  }
+
+  Getbussinessdetailsresponse bussinessdetails = Getbussinessdetailsresponse();
+ bool detailsshow = false;
+  getBussinessdetails({required String id}) async {
+    final response = await webService.getRequest(
+        url: "${webService.baseUrl}/advertising_detail/$id");
+    response.fold(
+      (l) {
+        var cusrtomerdetails =
+            getbussinessdetailsresponseFromJson(l.toString());
+        bussinessdetails = cusrtomerdetails;
+        detailsshow = true;
+        update();
+      },
+      (r) => print(r.message),
     );
   }
 
@@ -43,25 +61,24 @@ class BussinessCategoryController extends GetxController{
 
   createOffers(String id) async {
     Map<String, dynamic> params = {
-    "business_id": "2",
-    "title": "test",
-    "description": "description",
-    "business_advertising_image": "",
-    "business_email": "tesddddddti52ng@fgf.com",
-    "contact_number": "1122222221",
-    "business_advertising_type": "test",
-    "validity_from": "2022-11-11 12:00:00",
-    "validity_to": "2022-11-13 12:00:00",
-    "terms_condition": "terms_condition",
-    "business_advertising_code": "1",
-    "business_advertising_cta_url": "",
-    "business_advertising_video_url": "www.xyzaaaa.com",
-    "business_advertising_document": "",
-    "is_featured": "1",
-    "is_active": "1",
-    "advertising_category_id": "2",
-    "advertising_type_id": "1",
-
+      "business_id": "2",
+      "title": "test",
+      "description": "description",
+      "business_advertising_image": "",
+      "business_email": "tesddddddti52ng@fgf.com",
+      "contact_number": "1122222221",
+      "business_advertising_type": "test",
+      "validity_from": "2022-11-11 12:00:00",
+      "validity_to": "2022-11-13 12:00:00",
+      "terms_condition": "terms_condition",
+      "business_advertising_code": "1",
+      "business_advertising_cta_url": "",
+      "business_advertising_video_url": "www.xyzaaaa.com",
+      "business_advertising_document": "",
+      "is_featured": "1",
+      "is_active": "1",
+      "advertising_category_id": "2",
+      "advertising_type_id": "1",
       "company_name": companyname.text,
       "customer_name": cutomername.text,
       "mobile_number": phone.text,
@@ -79,16 +96,14 @@ class BussinessCategoryController extends GetxController{
         header: webService.headers,
         formData: jsonEncode(params));
     response.fold(
-          (l) {
+      (l) {
         var cuistom = createcustomersresponseFromJson(l.toString());
         Fluttertoast.showToast(msg: cuistom.message.toString());
         log(l.toString());
         getBussinessAll(id: id);
         Get.back();
       },
-          (r) => print(r.message),
+      (r) => print(r.message),
     );
   }
-
-
 }
